@@ -88,7 +88,7 @@
 
           <!-- Shopping Cart Icon -->
           <li>
-            <a href="" class="fas fa-shopping-cart"></a>
+            <a href="/order/displayCart" class="fas fa-shopping-cart"></a>
           </li>
         </ul>
       </div>

@@ -139,7 +139,9 @@
                   </div>
                   <h4>${product.productPrice}$</h4>
                 </div>
-                <a href="#"><i class="fas fa-shopping-cart cart"></i></a>
+                <a href="/order/addToCartShortcut/${product.id}"
+                  ><i class="fas fa-shopping-cart cart"></i
+                ></a>
               </div>
             </c:forEach>
           </div>

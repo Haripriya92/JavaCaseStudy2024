@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-@Table(name="order")
+@Table(name="orders")
 @Entity
 public class Order {
     @Id
@@ -37,8 +37,17 @@ public class Order {
     @Column(name = "order_status")
     private String orderStatus;
 
-    @Column(name = "total_amount")
-    private BigDecimal totalAmount;
+    @Column(name = "subtotal")
+    private BigDecimal subTotal;
+
+    @Column(name = "total")
+    private BigDecimal total;
+
+    @Column(name = "tax")
+    private BigDecimal tax;
+
+    @Column(name = "order_number")
+    private String orderNumber;
 
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetail;

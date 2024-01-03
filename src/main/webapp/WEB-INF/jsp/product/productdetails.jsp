@@ -13,7 +13,7 @@
     <h4>${selectedProduct.productName}</h4>
     <h2>${selectedProduct.productPrice}$</h2>
     <form
-      action="/order/listcart/${selectedProduct.id}"
+      action="/order/addToCart/${selectedProduct.id}"
       method="post"
       id="cartForm"
     >

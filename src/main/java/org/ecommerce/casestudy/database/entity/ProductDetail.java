@@ -29,17 +29,6 @@ public class ProductDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "main_product_id")
     private Product mainProduct;
-
-    @Column(name = "product_status")
-    private String productStatus;
-
-
-    @Column(name = "cart_quantity")
-    private Integer cartQuantity;
-
-
-    @Column(name = "cart_total")
-    private BigDecimal cartTotal;
 /*
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;*/
