@@ -49,9 +49,9 @@ Database tables
 
 7.productDetails Table
 
-![home.JPG](..%2F..%2Fproject_images%2Fhome.JPG)
-![shop.JPG](..%2F..%2Fproject_images%2Fshop.JPG)
-![product_detail.JPG](..%2F..%2Fproject_images%2Fproduct_detail.JPG)
-![cartpage.JPG](..%2F..%2Fproject_images%2Fcartpage.JPG)
-![checkoutpage.JPG](..%2F..%2Fproject_images%2Fcheckoutpage.JPG)
-![orderplaced.JPG](..%2F..%2Fproject_images%2Forderplaced.JPG)
+![home.JPG](project_images/home.JPG)
+![shop.JPG](project_images/shop.JPG)
+![product_detail.JPG](project_images/product_detail.JPG)
+![cartpage.JPG](project_images/cartpage.JPG)
+![checkoutpage.JPG](project_images/checkoutpage.JPG)
+![orderplaced.JPG](project_images/orderplaced.JPG)
