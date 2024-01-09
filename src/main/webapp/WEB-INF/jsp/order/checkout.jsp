@@ -34,132 +34,224 @@
             </div>
             <br />
           </div>
-          <label class="pay">Name on Card</label>
-          <input type="text" name="holdername" placeholder="Name" />
-          <div class="row">
-            <div class="col-8 col-md-6">
-              <label class="pay">Card Number</label>
-              <input
-                type="text"
-                name="cardno"
-                id="cr_no"
-                placeholder="0000-0000-0000-0000"
-                minlength="19"
-                maxlength="19"
-              />
+          <div class="credit_card">
+            <label class="pay">Name on Card</label>
+            <input type="text" name="holdername" placeholder="Name" />
+            <div class="row">
+              <div class="col-8 col-md-6">
+                <label class="pay">Card Number</label>
+                <input
+                  type="text"
+                  name="cardno"
+                  id="cr_no"
+                  placeholder="0000-0000-0000-0000"
+                  minlength="19"
+                  maxlength="19"
+                />
+              </div>
+              <div class="col-4 col-md-6">
+                <label class="pay">CVV</label>
+                <input
+                  type="password"
+                  name="cvvno"
+                  placeholder="&#9679;&#9679;&#9679;"
+                  class="placeicon"
+                  minlength="3"
+                  maxlength="3"
+                />
+              </div>
             </div>
-            <div class="col-4 col-md-6">
-              <label class="pay">CVV</label>
-              <input
-                type="password"
-                name="cvcpwd"
-                placeholder="&#9679;&#9679;&#9679;"
-                class="placeicon"
-                minlength="3"
-                maxlength="3"
-              />
+            <div class="row">
+              <div class="col-md-12">
+                <label class="pay">Expiration Date</label>
+              </div>
+              <div class="col-md-12">
+                <input
+                  type="text"
+                  name="expdate"
+                  id="exp"
+                  placeholder="MM/YY"
+                  minlength="5"
+                  maxlength="5"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <label class="pay">Expiration Date</label>
+            <div class="checkout__input__checkbox">
+              <label for="payment">
+                Add Card for Payment
+                <input
+                  type="checkbox"
+                  id="payment"
+                  name="addCardForPayment"
+                  value="true"
+                />
+                <span class="checkmark"></span>
+              </label>
             </div>
-            <div class="col-md-12">
-              <input
-                type="text"
-                name="exp"
-                id="exp"
-                placeholder="MM/YY"
-                minlength="5"
-                maxlength="5"
-              />
-            </div>
-          </div>
-          <div class="checkout__input__checkbox">
-            <label for="payment">
-              Add Card for Payment
-              <input type="checkbox" id="payment" />
-              <span class="checkmark"></span>
-            </label>
           </div>
         </div>
       </div>
     </div>
     <div class="checkout__form">
-      <form action="#">
+      <form action="/order/placeOrder">
         <div class="row">
           <div class="col-lg-8 col-md-6">
             <h6 class="checkout__title" style="margin-top: 45px">
               Billing Details
             </h6>
             <div class="row">
+              <c:if test="${errors.hasFieldErrors('firstName')}">
+                        <div style="color:red">
+                            <c:forEach items="${errors.getFieldErrors('firstName')}" var="error">
+                                ${error.defaultMessage}<br>
+                            </c:forEach>
+                        </div>
+                    </c:if>
               <div class="col-lg-6">
                 <div class="checkout__input">
                   <p>First Name<span>*</span></p>
-                  <input type="text" value="${user.firstName}" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    value="${user.firstName}"
+                  />
                 </div>
               </div>
+              <c:if test="${errors.hasFieldErrors('lastName')}">
+                        <div style="color:red">
+                            <c:forEach items="${errors.getFieldErrors('lastName')}" var="error">
+                                ${error.defaultMessage}<br>
+                            </c:forEach>
+                        </div>
+                    </c:if>
               <div class="col-lg-6">
                 <div class="checkout__input">
                   <p>Last Name<span>*</span></p>
-                  <input type="text" value="${user.lastName}" />
+                  <input type="text" name="lastName" value="${user.lastName}" />
                 </div>
               </div>
             </div>
+            <c:if test="${errors.hasFieldErrors('country')}">
+                        <div style="color:red">
+                            <c:forEach items="${errors.getFieldErrors('country')}" var="error">
+                                ${error.defaultMessage}<br>
+                            </c:forEach>
+                        </div>
+                    </c:if>
             <div class="checkout__input">
               <p>Country<span>*</span></p>
-              <input type="text" value="${user.country}" />
+              <input type="text" name="country" value="${user.country}" />
             </div>
+            <c:if test="${errors.hasFieldErrors('address1')}">
+                        <div style="color:red">
+                            <c:forEach items="${errors.getFieldErrors('address1')}" var="error">
+                                ${error.defaultMessage}<br>
+                            </c:forEach>
+                        </div>
+                    </c:if>
             <div class="checkout__input">
               <p>Address<span>*</span></p>
               <input
                 type="text"
                 placeholder="Street Address"
+                name="address1"
+                value="${user.address1}"
                 class="checkout__input__add"
               />
+              <c:if test="${errors.hasFieldErrors('address2')}">
+                        <div style="color:red">
+                            <c:forEach items="${errors.getFieldErrors('address2')}" var="error">
+                                ${error.defaultMessage}<br>
+                            </c:forEach>
+                        </div>
+                    </c:if>
               <input
                 type="text"
+                name="address2"
+                value="${user.address2}"
                 placeholder="Apartment, suite, unite ect (optinal)"
               />
             </div>
+            
+            <c:if test="${errors.hasFieldErrors('city')}">
+              <div style="color:red">
+                  <c:forEach items="${errors.getFieldErrors('city')}" var="error">
+                      ${error.defaultMessage}<br>
+                  </c:forEach>
+              </div>
+          </c:if>
             <div class="checkout__input">
               <p>Town/City<span>*</span></p>
-              <input type="text" />
+              <input type="text" name="city" value="${user.city}" />
             </div>
+            <c:if test="${errors.hasFieldErrors('state')}">
+              <div style="color:red">
+                  <c:forEach items="${errors.getFieldErrors('state')}" var="error">
+                      ${error.defaultMessage}<br>
+                  </c:forEach>
+              </div>
+          </c:if>
             <div class="checkout__input">
               <p>State<span>*</span></p>
-              <input type="text" />
+              <input type="text" name="state" value="${user.state}" />
             </div>
+            <c:if test="${errors.hasFieldErrors('zip')}">
+              <div style="color:red">
+                  <c:forEach items="${errors.getFieldErrors('zip')}" var="error">
+                      ${error.defaultMessage}<br>
+                  </c:forEach>
+              </div>
+          </c:if>
             <div class="checkout__input">
               <p>Postcode / ZIP<span>*</span></p>
-              <input type="text" />
+              <input type="text" name="zip" value="${user.zip}" />
             </div>
             <div class="row">
+              <c:if test="${errors.hasFieldErrors('phone')}">
+                        <div style="color:red">
+                            <c:forEach items="${errors.getFieldErrors('phone')}" var="error">
+                                ${error.defaultMessage}<br>
+                            </c:forEach>
+                        </div>
+                    </c:if>
               <div class="col-lg-6">
                 <div class="checkout__input">
                   <p>Phone<span>*</span></p>
-                  <input type="text" value="${user.phone}" />
+                  <input type="text" name="phone" value="${user.phone}" />
                 </div>
               </div>
+              <c:if test="${errors.hasFieldErrors('email')}">
+                <div style="color:red">
+                    <c:forEach items="${errors.getFieldErrors('email')}" var="error">
+                        ${error.defaultMessage}<br>
+                    </c:forEach>
+                </div>
+            </c:if>
               <div class="col-lg-6">
                 <div class="checkout__input">
                   <p>Email<span>*</span></p>
-                  <input type="text" value="${user.email}" />
+                  <input type="text" name="email" value="${user.email}" />
                 </div>
               </div>
             </div>
             <div class="checkout__input__checkbox">
               <label for="diff-acc">
-                Note about your order, e.g, special note for delivery
-                <input type="checkbox" id="diff-acc" />
-                <span class="checkmark"></span>
+                  Add as default address
+                  <input
+                      type="checkbox"
+                      id="diff-acc"
+                      name="defaultAddress"
+                      value="true"
+                  />
+                  <span class="checkmark"></span>
               </label>
-            </div>
+          </div>
             <div class="checkout__input">
               <p>Order notes</p>
               <input
                 type="text"
                 placeholder="Notes about your order, e.g. special notes for delivery."
+                name="ordernotes"
               />
             </div>
           </div>
@@ -184,8 +276,8 @@
                 <li>Tax <span>$ ${tax}</span></li>
                 <li>Total <span>$ ${total}</span></li>
               </ul>
-              <a href="/order/placeOrder">
-                <button type="button" class="site-btn">PLACE ORDER</button>
+              <a href="">
+                <button type="submit" class="site-btn">PLACE ORDER</button>
               </a>
             </div>
           </div>

@@ -74,6 +74,12 @@
             </li>
           </sec:authorize>
 
+                <sec:authorize access="hasAnyAuthority('ADMIN')">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/admin/task">Admin</a>
+                       </li>
+                        </sec:authorize>
+
           <!-- Authentication Section - Show when authenticated -->
           <sec:authorize access="isAuthenticated()">
             <li class="nav-item">

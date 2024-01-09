@@ -21,4 +21,11 @@ public class AuthController {
         return response;
     }
 
+    @GetMapping("/admin/task")
+    public ModelAndView admin() {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("auth/admintask");
+        return response;
+    }
+
 }

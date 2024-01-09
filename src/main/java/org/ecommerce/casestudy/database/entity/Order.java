@@ -49,6 +49,9 @@ public class Order {
     @Column(name = "order_number")
     private String orderNumber;
 
+    @Column(name = "address")
+    private String address;
+
     @OneToMany(mappedBy = "order")
     private List<OrderDetail> orderDetail;
 }

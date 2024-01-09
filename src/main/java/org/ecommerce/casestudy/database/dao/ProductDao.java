@@ -1,8 +1,10 @@
 package org.ecommerce.casestudy.database.dao;
 import org.ecommerce.casestudy.database.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,5 +29,11 @@ public interface ProductDao extends JpaRepository<Product, Long> {
     @Query("SELECT p FROM Product p WHERE p.id = :selectedId")
     public Product findByproductId(Integer selectedId);
 
+    @Query("SELECT p FROM Product p WHERE p.productName = :name")
+    public Product findByproductName(String name);
 
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Product p WHERE p.productName = :name")
+    void deleteByProductName(String name);
 }

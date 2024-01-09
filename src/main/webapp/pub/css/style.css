@@ -522,3 +522,30 @@ footer a:hover {
     cursor: pointer;
     margin-right: 20px;
   }
+   .order {
+          text-align: center;
+          padding: 40px 0;
+          background: #EBF0F5;
+        }
+          .main_title {
+            color: #88B04B;
+            font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+            font-weight: 900;
+            font-size: 40px;
+            margin-bottom: 10px;
+          }
+         .sub_para {
+            color: #404F5E;
+            font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+            font-size:20px;
+            margin: 0;
+          }
+
+        .card {
+          background: white;
+          padding: 60px;
+          border-radius: 4px;
+          box-shadow: 0 2px 3px #C8D0D8;
+          display: inline-block;
+          margin: 0 auto;
+        }

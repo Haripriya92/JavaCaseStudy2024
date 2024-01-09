@@ -1,21 +1,23 @@
 package org.ecommerce.casestudy.controller;
 
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.ecommerce.casestudy.database.dao.CartDao;
 import org.ecommerce.casestudy.database.dao.OrderDao;
 import org.ecommerce.casestudy.database.dao.ProductDetailDao;
 import org.ecommerce.casestudy.database.entity.Cart;
+import org.ecommerce.casestudy.database.entity.Order;
 import org.ecommerce.casestudy.database.entity.ProductDetail;
 import org.ecommerce.casestudy.database.entity.User;
+import org.ecommerce.casestudy.formbean.PayementFormBean;
 import org.ecommerce.casestudy.security.AuthenticatedUserService;
 import org.ecommerce.casestudy.service.OrderService;
 import org.ecommerce.casestudy.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
@@ -90,7 +92,8 @@ public class OrderController {
     @GetMapping("/order/displayCart")
     public ModelAndView displayCart() {
         ModelAndView response = new ModelAndView();
-        List<Cart> cartList = cartDao.findAll();
+        User user=aunthenticatedUser.loadCurrentUser();
+        List<Cart> cartList = cartDao.findByUserId(user.getId());
         BigDecimal subTotal=orderService.findCartTotal(cartList);
         BigDecimal tax=orderService.findTaxPercentage(subTotal);
         BigDecimal total=subTotal.add(tax);
@@ -143,10 +146,29 @@ public class OrderController {
     }
 
     @GetMapping("/order/placeOrder")
-    public ModelAndView placeOrder() {
+    public ModelAndView placeOrder(@Valid PayementFormBean  form, BindingResult bindingResult, HttpSession session,
+                                   @RequestParam(required=false) Boolean defaultAddress) {
         ModelAndView response = new ModelAndView();
-        orderService.addToOrderandOrderDetails();
-        response.setViewName("order/checkout");
+
+        if (bindingResult.hasErrors()) {
+            response.addObject("form", form);
+            response.addObject("errors", bindingResult);
+            List<Cart> cartList = cartDao.findAll();
+            BigDecimal subTotal=orderService.findCartTotal(cartList);
+            BigDecimal tax=orderService.findTaxPercentage(subTotal);
+            BigDecimal total=subTotal.add(tax);
+            if(!cartList.isEmpty()) {
+                response.addObject("subtotal", subTotal);
+                response.addObject("tax", tax);
+                response.addObject("total", total);
+            }
+            response.setViewName("order/checkout");
+            return response;
+        }
+
+       Order order= orderService.addToOrderandOrderDetails(defaultAddress,form);
+       response.addObject("order",order);
+        response.setViewName("order/orderplacement");
         return response;
     }
 }

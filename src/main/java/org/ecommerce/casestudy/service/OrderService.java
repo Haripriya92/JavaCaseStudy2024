@@ -7,6 +7,7 @@ import org.ecommerce.casestudy.database.entity.Cart;
 import org.ecommerce.casestudy.database.entity.Order;
 import org.ecommerce.casestudy.database.entity.OrderDetail;
 import org.ecommerce.casestudy.database.entity.User;
+import org.ecommerce.casestudy.formbean.PayementFormBean;
 import org.ecommerce.casestudy.security.AuthenticatedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,12 +46,26 @@ public class OrderService {
        return tax;
    }
 
-    public void addToOrderandOrderDetails(){
+    public Order addToOrderandOrderDetails(Boolean defaultAddress, PayementFormBean form){
         User user=aunthenticatedUser.loadCurrentUser();
+        if(defaultAddress==null){
+            defaultAddress=false;
+               }
+        if(defaultAddress){
+            user.setAddress1(form.getAddress1());
+            user.setAddress2(form.getAddress2());
+            user.setCity(form.getCity());
+            user.setState(form.getState());
+            user.setZip(form.getZip());
+
+        }
+        String address=form.getAddress1()+form.getAddress2()+
+                form.getCity()+form.getState()+form.getZip();
         String orderNumber=generateOrderNumber("FAS");
-       Order order= updateOrderFromCart(orderNumber,user);
+       Order order= updateOrderFromCart(orderNumber,address,user);
         updateOrderDetailsFromCart(user.getId(),order);
         cartDao.deleteByUserId(user.getId());
+        return order;
 
     }
     public static String generateOrderNumber(String prefix) {
@@ -92,7 +107,7 @@ public class OrderService {
 
     }
 
-    public Order updateOrderFromCart(String orderNumber, User user) {
+    public Order updateOrderFromCart(String orderNumber,String address ,User user) {
 
         // Step 1: Retrieve Cart Information
         List<Cart> cartList = cartDao.findByUserId(user.getId());
@@ -127,7 +142,7 @@ public class OrderService {
                 order.setTax(tax);
                 order.setSubTotal(subTotal);
                 order.setOrderNumber(orderNumber);
-
+                order.setAddress(address);
 
             // Save or update order details
            return orderDao.save(order);

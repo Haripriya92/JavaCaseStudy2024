@@ -4,13 +4,17 @@ import org.ecommerce.casestudy.database.dao.CartDao;
 import org.ecommerce.casestudy.database.dao.ProductDao;
 import org.ecommerce.casestudy.database.dao.ProductDetailDao;
 import org.ecommerce.casestudy.database.entity.Cart;
+import org.ecommerce.casestudy.database.entity.Product;
 import org.ecommerce.casestudy.database.entity.ProductDetail;
+import org.ecommerce.casestudy.formbean.ProductFormBean;
 import org.ecommerce.casestudy.security.AuthenticatedUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @Service
@@ -60,4 +64,17 @@ public class ProductService {
         // Check if the save operation was successful
         return savedCart != null;
     }
+  public Product  addNewProduct(ProductFormBean form,String filename){
+        Product product=new Product();
+      LocalDateTime currentDateTime = LocalDateTime.now();
+
+      Timestamp addedDate = Timestamp.valueOf(currentDateTime);
+      product.setProductName(form.getProductName());
+      product.setProductDescription(form.getProductDescription());
+      product.setRating(form.getRating());
+        product.setAddedDate(addedDate);
+        product.setProductImage("/pub/images/product/" +filename);
+        product.setProductPrice(BigDecimal.valueOf(form.getPrice()));
+        return productDao.save(product);
+  }
 }

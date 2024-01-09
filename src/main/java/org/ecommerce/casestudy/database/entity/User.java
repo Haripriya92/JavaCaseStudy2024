@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 
 @Getter
 @Setter
@@ -33,6 +32,21 @@ public class User {
 
     @Column(name = "country")
     private String country;
+
+    @Column(name = "address1")
+    private String address1;
+
+    @Column(name = "address2")
+    private String address2;
+
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "zip")
+    private String zip;
+
+    @Column(name = "state")
+    private String state;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserRole userRole;
