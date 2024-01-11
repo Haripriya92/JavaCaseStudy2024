@@ -148,5 +148,19 @@ public class OrderService {
            return orderDao.save(order);
 
     }
+    public Order updateOrderStatus(Order order,String newOrderStatus){
+        if ( order != null ) {
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            Timestamp orderDate = Timestamp.valueOf(currentDateTime);
+            if (newOrderStatus.equals("Shipped")) {
+                order.setOrderStatus("Shipped");
+                order.setShippedDate(orderDate);
+            } else if (newOrderStatus.equals("Delivered")) {
+                order.setOrderStatus("Delivered");
+                order.setDeliveredDate(orderDate);
+            }
+        }
+        return orderDao.save(order);
+    }
 
 }

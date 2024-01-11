@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Repository
 public interface OrderDao extends JpaRepository<Order, Long> {
@@ -17,5 +19,11 @@ public interface OrderDao extends JpaRepository<Order, Long> {
     @Modifying
     @Query("DELETE FROM Order o WHERE o.orderNumber = :number")
     void deleteByOrderNumber(String number);
+
+    @Query("SELECT o FROM Order o WHERE o.id = :id")
+    public Order findById(Integer id);
+
+    @Query("SELECT o FROM Order o WHERE o.customer.id = :id")
+    public List<Order> findByCustomerId(Integer id);
 
 }

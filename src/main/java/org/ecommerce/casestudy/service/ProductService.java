@@ -64,17 +64,26 @@ public class ProductService {
         // Check if the save operation was successful
         return savedCart != null;
     }
-  public Product  addNewProduct(ProductFormBean form,String filename){
+  public Product  addNewProductAndProductDetails(ProductFormBean form,String filename){
+        Product product=addNewProduct(form,filename);
+      productDetailDao.insertProductDetails(form.getSelectedCategory(),10,product.getId(),"S");
+      productDetailDao.insertProductDetails(form.getSelectedCategory(),10,product.getId(),"M");
+      productDetailDao.insertProductDetails(form.getSelectedCategory(),10,product.getId(),"L");
+      productDetailDao.insertProductDetails(form.getSelectedCategory(),10,product.getId(),"XL");
+        return product;
+  }
+    public Product  addNewProduct(ProductFormBean form,String filename){
         Product product=new Product();
-      LocalDateTime currentDateTime = LocalDateTime.now();
+        LocalDateTime currentDateTime = LocalDateTime.now();
 
-      Timestamp addedDate = Timestamp.valueOf(currentDateTime);
-      product.setProductName(form.getProductName());
-      product.setProductDescription(form.getProductDescription());
-      product.setRating(form.getRating());
+        Timestamp addedDate = Timestamp.valueOf(currentDateTime);
+        product.setProductName(form.getProductName());
+        product.setProductDescription(form.getProductDescription());
+        product.setRating(form.getRating());
         product.setAddedDate(addedDate);
         product.setProductImage("/pub/images/product/" +filename);
         product.setProductPrice(BigDecimal.valueOf(form.getPrice()));
         return productDao.save(product);
-  }
+    }
+
 }

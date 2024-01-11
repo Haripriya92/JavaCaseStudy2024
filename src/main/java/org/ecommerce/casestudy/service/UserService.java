@@ -2,6 +2,7 @@ package org.ecommerce.casestudy.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ecommerce.casestudy.database.dao.UserDao;
+import org.ecommerce.casestudy.database.entity.Order;
 import org.ecommerce.casestudy.database.entity.User;
 import org.ecommerce.casestudy.formbean.CreateUserFormBean;
 import org.hibernate.validator.internal.util.stereotypes.Lazy;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Service

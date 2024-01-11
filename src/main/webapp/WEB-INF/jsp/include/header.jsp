@@ -42,8 +42,6 @@
           <!-- Navigation Links -->
           <li><a href="/auth/home">Home</a></li>
           <li><a href="/product/productlist">Shop</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
 
           <!-- Authentication Section - Show when not authenticated -->
           <sec:authorize access="!isAuthenticated()">
@@ -74,16 +72,16 @@
             </li>
           </sec:authorize>
 
-                <sec:authorize access="hasAnyAuthority('ADMIN')">
-                    <li class="nav-item">
-                      <a class="nav-link" href="/admin/task">Admin</a>
-                       </li>
-                        </sec:authorize>
+          <sec:authorize access="hasAnyAuthority('ADMIN')">
+            <li class="nav-item">
+              <a class="nav-link" href="/admin/task">Admin</a>
+            </li>
+          </sec:authorize>
 
           <!-- Authentication Section - Show when authenticated -->
           <sec:authorize access="isAuthenticated()">
             <li class="nav-item">
-              <a class="nav-link" href=""
+              <a class="nav-link" href="/auth/user"
                 ><sec:authentication property="principal.firstName"
               /></a>
             </li>

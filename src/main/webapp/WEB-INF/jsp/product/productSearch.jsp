@@ -73,7 +73,7 @@
               <button
                 class="dropdown-item"
                 type="button"
-                data-value="babies"
+                data-value="babies and toddlers"
                 onclick="redirectToController(this)"
               >
                 Babies and Toddlers
@@ -146,17 +146,6 @@
             </c:forEach>
           </div>
         </section>
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="product__pagination">
-              <a class="active" href="#">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <span>...</span>
-              <a href="#">21</a>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

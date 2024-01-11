@@ -131,8 +131,7 @@ public class OrderController {
         ModelAndView response = new ModelAndView();
         User user=aunthenticatedUser.loadCurrentUser();
         response.addObject("user",user);
-
-        List<Cart> cartList = cartDao.findAll();
+        List<Cart> cartList = cartDao.findByUserId(user.getId());
         BigDecimal subTotal=orderService.findCartTotal(cartList);
         BigDecimal tax=orderService.findTaxPercentage(subTotal);
         BigDecimal total=subTotal.add(tax);
